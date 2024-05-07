@@ -125,11 +125,11 @@ function onChatMessage(id, name, message)
 end
 
 function onInit()
-    RegisterEvent("clientRequestMoney", "clientRequestMoney") -- used by the client to request their money value
-    RegisterEvent("onChatMessage", "onChatMessage") -- used buy the server to register commands
-    RegisterEvent("changeMoney", "changeMoney") -- used by other plugins to change money of players. Pass in a server ID and amount (can be negative)
-    RegisterEvent("loadMoney", "loadMoney") -- trigger to load money from disk
-    RegisterEvent("saveMoney", "saveMoney") -- trigger to save money to disk (will send to players if using client sided mod)
+    MP.RegisterEvent("clientRequestMoney", "clientRequestMoney") -- used by the client to request their money value
+    MP.RegisterEvent("onChatMessage", "onChatMessage") -- used buy the server to register commands
+    MP.RegisterEvent("changeMoney", "changeMoney") -- used by other plugins to change money of players. Pass in a server ID and amount (can be negative)
+    MP.RegisterEvent("loadMoney", "loadMoney") -- trigger to load money from disk
+    MP.RegisterEvent("saveMoney", "saveMoney") -- trigger to save money to disk (will send to players if using client sided mod)
     loadMoney()
     loadConfig()
     if config.moneyPerMinute > 0 then
