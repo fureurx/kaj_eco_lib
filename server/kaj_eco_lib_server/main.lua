@@ -133,7 +133,9 @@ function onInit()
     loadMoney()
     loadConfig()
     if config.moneyPerMinute > 0 then
-        CreateThread("giveMoneyThread", 1)
+        MP.RegisterEvent("giveMoneyThread", "giveMoneyThread")
+        MP.CancelEventTimer("giveMoneyThread") -- Cancel first in case of lua state reload
+        MP.CreateEventTimer("giveMoneyThread", 1000)
     end
     print("-----------------------------------------")
     print("loaded kaj eco library v"..config.version)
