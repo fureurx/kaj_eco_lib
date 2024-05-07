@@ -20,8 +20,11 @@ end
 
 function loadMoney()
     local file = io.open(folderOfThisFile.."DB/data.json", "r")
-    money = json.decode(file:read("*a"))
-    file:close()
+    content = file:read("*a")
+    if content and content ~= "" then
+        money = json.decode(content)
+        file:close()
+    end
 end
 
 function saveMoney()
