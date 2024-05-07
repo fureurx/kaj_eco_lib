@@ -11,11 +11,11 @@ function clientRequestMoney(client)
 end
 
 function getPlayerMoney(player)
-    local discordID = GetPlayerDiscordID(player)
-    if money[discordID] == nil then
-        money[discordID] = config.startingBalance
+    local beamID = MP.GetPlayerIdentifiers(player).beammp
+    if money[beamID] == nil then
+        money[beamID] = config.startingBalance
     end
-    return money[discordID]
+    return money[beamID]
 end
 
 function loadMoney()
@@ -35,13 +35,13 @@ function saveMoney()
 end
 
 function changeMoney(user, amount)
-    local discordID = GetPlayerDiscordID(user)
-    if money[discordID] == nil then
-        money[discordID] = 0
+    local beamID = MP.GetPlayerIdentifiers(user).beammp
+    if money[beamID] == nil then
+        money[beamID] = 0
     end
-    money[discordID] = money[discordID] + amount
-    if money[discordID] < 0 and config.balanceCanBeNegative == false then
-        money[discordID] = 0
+    money[beamID] = money[beamID] + amount
+    if money[beamID] < 0 and config.balanceCanBeNegative == false then
+        money[beamID] = 0
     end
 end
 
