@@ -70,9 +70,10 @@ end
 
 function giveMoneyThread()
     secondCount = secondCount - 1
-    if GetPlayers() ~= nil and secondCount <= 0 then
+    p = MP.GetPlayers()
+    if next(p) ~= nil and secondCount <= 0 then
       secondCount = 60
-      for id, name in pairs(GetPlayers()) do
+      for id, name in pairs(MP.GetPlayers()) do
           changeMoney(id, config.moneyPerMinute)
       end
       saveMoney()
