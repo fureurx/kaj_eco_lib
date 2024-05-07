@@ -1,7 +1,7 @@
 local M = {}
 local money = {}
 local config = {}
-local folderOfThisFile = "Resources\\Server\\kaj_eco_lib_server\\"
+local folderOfThisFile = "Resources/Server/kaj_eco_lib_server/"
 local json = require('Resources.Server.kaj_eco_lib_server.json')
 local secondCount = 60
 
@@ -19,13 +19,13 @@ function getPlayerMoney(player)
 end
 
 function loadMoney()
-    local file = io.open(folderOfThisFile.."data.json", "r")
+    local file = io.open(folderOfThisFile.."DB/data.json", "r")
     money = json.decode(file:read("*a"))
     file:close()
 end
 
 function saveMoney()
-    local file = assert(io.open(folderOfThisFile.."data.json", "w"))
+    local file = assert(io.open(folderOfThisFile.."DB/data.json", "w"))
     file:write(json.encode(money))
     file:close()
     updateMoneyForAllPlayers()
