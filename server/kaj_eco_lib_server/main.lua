@@ -7,7 +7,7 @@ local secondCount = 60
 
 
 function clientRequestMoney(client)
-    TriggerClientEvent(client, "recieveMoneyValue", getPlayerMoney(client))
+    MP.TriggerClientEvent(client, "recieveMoneyValue", getPlayerMoney(client))
 end
 
 function getPlayerMoney(player)
@@ -53,15 +53,15 @@ function loadConfig()
 end
 
 function updateMoneyForAllPlayers()
-    if config.clientModInstalled == true and GetPlayers() ~= nil then
-        for id, name in pairs(GetPlayers()) do
-            TriggerClientEvent(id, "recieveMoneyValue", getPlayerMoney(id))
+    if config.clientModInstalled == true and MP.GetPlayers() ~= nil then
+        for id, name in pairs(MP.GetPlayers()) do
+            MP.TriggerClientEvent(id, "recieveMoneyValue", getPlayerMoney(id))
         end
     end
 end
 
 function getPlayerIDFromName(player)
-    for id,name in pairs(GetPlayers()) do
+    for id,name in pairs(MP.GetPlayers()) do
         if name == player then
             return id
         end
@@ -104,10 +104,10 @@ function onChatMessage(id, name, message)
     print(name..":"..message)
     if message:find("^ /") ~= nil then
         if message == ' /balance' then
-            SendChatMessage(id, "Balance: "..config.currencySymbol..tostring(getPlayerMoney(id)))
+            MP.SendChatMessage(id, "Balance: "..config.currencySymbol..tostring(getPlayerMoney(id)))
         end
         if message == ' /top' then
-            SendChatMessage(id, "This is coming soon!")
+            MP.SendChatMessage(id, "This is coming soon!")
         end
         if message:find("^ /pay") ~= nil and config.clientsCanPayOthers == true then
             message = string.sub(message, 7)
@@ -115,13 +115,13 @@ function onChatMessage(id, name, message)
             local player = getPlayerIDFromName(cmdArgs[1])
             local amount = abs(tonumber(cmdArgs[2]))
             if player == nil then
-              SendChatMessage(id, "Could not find player to send money to.")
+              MP.SendChatMessage(id, "Could not find player to send money to.")
             elseif getPlayerMoney(id) >= amount then
                 changeMoney(id, -amount)
                 changeMoney(player, amount)
                 saveMoney()
-                SendChatMessage(id, "You sent "..config.currencySymbol..tostring(amount).." to "..cmdArgs[1])
-                SendChatMessage(player, GetPlayerName(id).." sent you "..config.currencySymbol..tostring(amount))
+                MP.SendChatMessage(id, "You sent "..config.currencySymbol..tostring(amount).." to "..cmdArgs[1])
+                MP.SendChatMessage(player, MP.GetPlayerName(id).." sent you "..config.currencySymbol..tostring(amount))
             end
         end
         return 1
