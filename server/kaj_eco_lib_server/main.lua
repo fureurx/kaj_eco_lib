@@ -7,7 +7,7 @@ local secondCount = 60
 
 
 function clientRequestMoney(client)
-    MP.TriggerClientEvent(client, "recieveMoneyValue", getPlayerMoney(client))
+    MP.TriggerClientEvent(client, "recieveMoneyValue", tostring(getPlayerMoney(client)))
 end
 
 function getPlayerMoney(player)
@@ -55,7 +55,7 @@ end
 function updateMoneyForAllPlayers()
     if config.clientModInstalled == true and MP.GetPlayers() ~= nil then
         for id, name in pairs(MP.GetPlayers()) do
-            MP.TriggerClientEvent(id, "recieveMoneyValue", getPlayerMoney(id))
+            MP.TriggerClientEvent(id, "recieveMoneyValue", tostring(getPlayerMoney(id)))
         end
     end
 end
